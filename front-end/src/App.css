@@ -1,0 +1,117 @@
+/* Container card */
+.container {
+  margin: 20px auto;
+  max-width: 800px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+/* Title */
+.container h2 {
+  margin-bottom: 15px;
+  font-size: 20px;
+  color: #333;
+}
+
+/* Table */
+.cve-table {
+  width: auto; /* auto width so it fits content */
+  min-width: 600px; /* optional to avoid too narrow */
+  border-collapse: collapse;
+  margin: 0 auto; /* center table */
+  font-family: sans-serif;
+}
+
+.cve-table th, .cve-table td {
+  border: 1px solid #ddd;
+  padding: 8px 12px;
+  font-size: 13px;
+  text-align: center; /* center content */
+}
+
+.cve-table th {
+  background: #f7f7f7;
+  color: #555;
+}
+
+.cve-table tr:nth-child(even) {
+  background: #fafafa;
+}
+
+.cve-table tr:hover {
+  background: #f1f5ff;
+}
+
+/* Status pill */
+.status-pill {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 12px;
+  text-align: center;
+}
+
+.status-high { background: #fddede; color: #d93025; }
+.status-medium { background: #fff4e5; color: #fb8c00; }
+.status-low { background: #e6f4ea; color: #188038; }
+.status-default { background: #e8eef8; color: #1a73e8; }
+
+/* Pagination */
+.pagination {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.pagination select {
+  padding: 4px 8px;
+}
+
+.pagination button {
+  padding: 4px 8px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.pagination button:hover {
+  background: #f3f6ff;
+}
+
+.pagination button.active {
+  font-weight: bold;
+  background: #d0e1ff;
+}
+
+/* Loading / No data row */
+.table-message {
+  text-align: center;
+  padding: 16px;
+  font-style: italic;
+  color: #666;
+}
+
+/* Responsive: horizontal scroll on small screens */
+@media (max-width: 700px) {
+  .container {
+    padding: 10px;
+  }
+
+  .cve-table {
+    display: block;
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  .cve-table th, .cve-table td {
+    white-space: nowrap;
+  }
+}
