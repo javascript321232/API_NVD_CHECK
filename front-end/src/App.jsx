@@ -53,14 +53,17 @@ function App() {
 
       <table className="cve-table">
         <thead>
-          <tr>
-            <th>CVE ID</th>
-            <th>IDENTIFIER</th>
-            <th>PUBLISHED DATE</th>
-            <th>LAST MODIFIED DATE</th>
-            <th>STATUS</th>
-          </tr>
-        </thead>
+  <tr>
+    <th>CVE ID</th>
+    <th>IDENTIFIER</th>
+    <th>PUBLISHED DATE</th>
+    <th>LAST MODIFIED DATE</th>
+    <th>BASE SEVERITY</th>
+    <th>BASE SCORE</th>
+    <th>STATUS</th>
+  </tr>
+</thead>
+
         <tbody>
           {loading ? (
             <tr>
@@ -73,16 +76,33 @@ function App() {
           ) : (
             cves.map((cve) => (
               <tr key={cve._id}>
-                <td>{cve.id || cve.cve_id || cve._id}</td>
-                <td>{cve.sourceIdentifier || "-"}</td>
-                <td>{cve.published || cve.published_date || "-"}</td>
-                <td>{cve.lastModified || cve.last_modified_date || "-"}</td>
-                <td>
-                  <span className={`status-pill ${getStatusClass(cve.vulnStatus)}`}>
-                    {cve.vulnStatus || "-"}
-                  </span>
-                </td>
-              </tr>
+  <td>{cve.id || cve.cve_id || cve._id}</td>
+  <td>{cve.sourceIdentifier || "-"}</td>
+  <td>{cve.published || cve.published_date || "-"}</td>
+  <td>{cve.lastModified || cve.last_modified_date || "-"}</td>
+
+  {/* Base Severity */}
+  <td>
+    <span
+      className={`status-pill ${getStatusClass(
+        cve.metrics?.cvssMetricV2?.[0]?.baseSeverity
+      )}`}
+    >
+      {cve.metrics?.cvssMetricV2?.[0]?.baseSeverity || "-"}
+    </span>
+  </td>
+
+  {/* Base Score */}
+  <td>{cve.metrics?.cvssMetricV2?.[0]?.cvssData?.baseScore ?? "-"}</td>
+
+  {/* Vulnerability Status */}
+  <td>
+    <span className={`status-pill ${getStatusClass(cve.vulnStatus)}`}>
+      {cve.vulnStatus || "-"}
+    </span>
+  </td>
+</tr>
+
             ))
           )}
         </tbody>
@@ -99,7 +119,7 @@ function App() {
               fetchCves(1, newLimit);
             }}
           >
-            {[10, 20, 50, 100].map((n) => (
+            {[5,10,15, 20, 50, 100].map((n) => (
               <option key={n} value={n}>{n}</option>
             ))}
           </select>
